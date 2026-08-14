@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Créer et monétiser du contenu avec l'IA — Formation complète pour solopreneurs</title>
+<meta name="description" content="Un film 100 % IA est sorti. Un solo peut désormais produire ce qui demandait une équipe. Apprenez à créer, publier et monétiser vos vidéos 100 % IA en 2 semaines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Inter','Segoe UI',system-ui,sans-serif; background:#070b14; color:#e8ecf5; overflow-x:hidden; }
+  #bg { position:fixed; inset:0; z-index:0; }
+  .content { position:relative; z-index:2; }
+
+  /* Nav */
+  .nav { position:fixed; top:0; left:0; right:0; z-index:10; display:flex; justify-content:space-between; align-items:center;
+         padding:1.2rem 2.5rem; background:linear-gradient(rgba(7,11,20,.85), transparent); }
+  .logo { font-weight:800; font-size:1.15rem; letter-spacing:.02em; }
+  .logo span { background:linear-gradient(120deg,#22d3ee,#8b5cf6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .nav a { color:#aab8d0; text-decoration:none; margin-left:1.5rem; font-size:.9rem; }
+  .nav a:hover { color:#67e8f9; }
+
+  /* Hero */
+  .hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; perspective:1000px; padding:6rem 6vw 4rem; }
+  .hero-inner { transform-style:preserve-3d; }
+  .layer { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; will-change:transform; }
+  .badge { display:inline-block; background:rgba(139,92,246,.14); border:1px solid rgba(139,92,246,.4); color:#c4b5fd; border-radius:999px; padding:.4rem 1.1rem; font-size:.8rem; font-weight:600; letter-spacing:.04em; margin-bottom:1.4rem; }
+  .title { font-size:clamp(2.1rem, 5.6vw, 4.6rem); font-weight:900; letter-spacing:-0.025em; line-height:1.08;
+           background:linear-gradient(120deg,#5eead4,#22d3ee,#818cf8,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent;
+           text-shadow:0 0 60px rgba(34,211,238,.18); max-width:980px; }
+  .subtitle { font-size:clamp(1rem, 2vw, 1.35rem); color:#9fb0c9; margin-top:1.4rem; font-weight:300; max-width:720px; line-height:1.6; }
+  .cta { margin-top:2.6rem; display:inline-flex; gap:.9rem; flex-wrap:wrap; justify-content:center; }
+  .btn { padding:.95rem 2.1rem; border-radius:999px; font-weight:700; text-decoration:none; transition:transform .2s, box-shadow .2s; font-size:1rem; }
+  .btn-primary { background:linear-gradient(120deg,#06b6d4,#8b5cf6); color:#fff; box-shadow:0 0 35px rgba(139,92,246,.45); }
+  .btn-ghost { border:1px solid rgba(255,255,255,.25); color:#dbe4f0; background:rgba(255,255,255,.03); }
+  .btn:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 0 50px rgba(139,92,246,.7); }
+
+  .scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); color:#5b6b85; font-size:.75rem; letter-spacing:.28em; text-transform:uppercase; animation:float 2.4s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translate(-50%,0)} 50%{transform:translate(-50%,-10px)} }
+
+  /* Sections génériques */
+  section { padding:5.5rem 6vw; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  .kicker { color:#67e8f9; font-size:.8rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; margin-bottom:.8rem; }
+  h2.sec { font-size:clamp(1.7rem, 3.6vw, 2.6rem); font-weight:800; letter-spacing:-.02em; line-height:1.15;
+           background:linear-gradient(120deg,#a5f3fc,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lead { color:#9fb0c9; margin-top:1rem; line-height:1.7; max-width:760px; font-size:1.02rem; }
+
+  /* Preuve */
+  .preuve { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.2rem; margin-top:2.6rem; }
+  .stat { background:rgba(13,18,32,.75); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:1.6rem; backdrop-filter:blur(12px); }
+  .stat b { font-size:1.7rem; background:linear-gradient(120deg,#67e8f9,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent; display:block; }
+  .stat span { color:#7c8aa5; font-size:.85rem; line-height:1.5; display:block; margin-top:.35rem; }
+
+  /* Leçons */
+  .lecons { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.1rem; margin-top:2.6rem; }
+  .lecon { background:rgba(13,18,32,.72); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:1.5rem;
+           transition:transform .25s, border-color .25s, box-shadow .25s; transform-style:preserve-3d; will-change:transform; }
+  .lecon:hover { transform:translateY(-4px); border-color:rgba(34,211,238,.45); box-shadow:0 18px 50px rgba(34,211,238,.12); }
+  .lecon .num { font-size:.78rem; font-weight:800; letter-spacing:.15em; color:#67e8f9; }
+  .lecon h3 { font-size:1.12rem; color:#dbeafe; margin:.5rem 0 .45rem; font-weight:700; }
+  .lecon p { color:#8b9bb8; font-size:.9rem; line-height:1.6; }
+
+  /* Offres */
+  .offers { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.3rem; margin-top:2.6rem; align-items:stretch; }
+  .offer { background:rgba(13,18,32,.78); border:1px solid rgba(255,255,255,.1); border-radius:22px; padding:1.9rem 1.7rem; display:flex; flex-direction:column; position:relative; backdrop-filter:blur(12px); }
+  .offer.pop { border-color:rgba(139,92,246,.6); box-shadow:0 0 45px rgba(139,92,246,.22); }
+  .offer .tag { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:linear-gradient(120deg,#06b6d4,#8b5cf6); color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.32rem .9rem; border-radius:999px; white-space:nowrap; }
+  .offer h3 { color:#dbeafe; font-size:1.25rem; margin-bottom:.5rem; }
+  .offer .desc { color:#9fb0c9; font-size:.9rem; line-height:1.65; flex:1; }
+  .offer ul { list-style:none; margin-top:1rem; }
+  .offer ul li { color:#8b9bb8; font-size:.87rem; padding:.3rem 0 .3rem 1.4rem; position:relative; line-height:1.5; }
+  .offer ul li::before { content:'✓'; position:absolute; left:0; color:#5eead4; font-weight:800; }
+  .offer .prix { font-size:2.2rem; font-weight:900; margin-top:1.3rem; }
+  .offer .prix small { font-size:.85rem; color:#7c8aa5; font-weight:500; }
+  .offer .prix em { font-style:normal; background:linear-gradient(120deg,#67e8f9,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .offer a.btn { margin-top:1.2rem; text-align:center; }
+  .mini { text-align:center; color:#5b6b85; font-size:.8rem; margin-top:1.2rem; }
+
+  /* Commande */
+  .order { max-width:600px; margin:0 auto; padding:2.2rem; background:rgba(13,18,32,.85); border:1px solid rgba(139,92,246,.35); border-radius:22px; backdrop-filter:blur(14px); box-shadow:0 30px 80px rgba(0,0,0,.5); }
+  .order h2 { text-align:center; color:#dbeafe; margin-bottom:.6rem; font-size:1.4rem; }
+  .order p { color:#9fb0c9; font-size:.87rem; text-align:center; margin-bottom:1.2rem; line-height:1.6; }
+  .order label { display:block; font-size:.8rem; color:#9fb0c9; margin:.85rem 0 .3rem; font-weight:600; }
+  .order select, .order input { width:100%; padding:.78rem; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:#0b1220; color:#e8ecf5; font-size:.95rem; outline:none; }
+  .order select:focus, .order input:focus { border-color:#22d3ee; box-shadow:0 0 0 3px rgba(34,211,238,.15); }
+  .order button { width:100%; margin-top:1.2rem; padding:1rem; border:0; border-radius:12px; background:linear-gradient(120deg,#06b6d4,#8b5cf6); color:#fff; font-weight:800; font-size:1.05rem; cursor:pointer; transition:box-shadow .2s, transform .15s; }
+  .order button:hover { box-shadow:0 0 30px rgba(139,92,246,.55); transform:translateY(-2px); }
+  .ok { text-align:center; color:#5eead4; margin-top:1.1rem; display:none; font-weight:700; background:rgba(94,234,212,.08); border:1px solid rgba(94,234,212,.3); padding:.9rem; border-radius:12px; }
+
+  /* Garantie + footer */
+  .garantie { text-align:center; margin-top:3.5rem; }
+  .garantie .box { display:inline-flex; align-items:center; gap:1rem; background:rgba(13,18,32,.7); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:1.4rem 2rem; text-align:left; max-width:640px; }
+  .garantie .box .ic { font-size:2rem; }
+  .garantie .box b { color:#dbeafe; display:block; margin-bottom:.25rem; }
+  .garantie .box span { color:#8b9bb8; font-size:.88rem; line-height:1.55; }
+  .footer { text-align:center; color:#5b6b85; padding:2.5rem 1.5rem 3rem; font-size:.85rem; border-top:1px solid rgba(255,255,255,.06); margin-top:2rem; }
+  .footer a { color:#67e8f9; text-decoration:none; }
+
+  @media (max-width:640px){
+    .nav a { margin-left:1rem; }
+    section { padding:4rem 1.4rem; }
+    .offer .prix { font-size:1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">Créateur<span> IA</span></div>
+  <div>
+    <a href="#formation">La formation</a>
+    <a href="#offres">Offres</a>
+    <a href="#commander">Commander</a>
+  </div>
+</nav>
+
+<canvas id="bg"></canvas>
+
+<div class="content">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="layer" data-depth="0.4">
+        <div>
+          <span class="badge">🎬 Film 100 % IA — 2026</span>
+          <div class="title">Un film 100 % IA est sorti.<br>Un solo peut désormais produire<br>ce qui demandait une équipe.</div>
+          <div class="subtitle">Scénario, plans cinématographiques, voix, musique, montage : un seul créateur, zéro budget studio, zéro équipe. La méthode complète pour créer, publier et monétiser votre contenu vidéo 100 % IA — en 2 semaines.</div>
+          <div class="cta">
+            <a class="btn btn-primary" href="#offres">⚡ Je veux la méthode</a>
+            <a class="btn btn-ghost" href="#formation">Découvrir les 12 leçons</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">Défilez</div>
+  </section>
+
+  <!-- ============ PREUVE ============ -->
+  <section id="preuve">
+    <div class="wrap">
+      <div class="kicker">Pourquoi maintenant</div>
+      <h2 class="sec">Ce qui demandait 20 personnes en demande maintenant… une seule.</h2>
+      <p class="lead">En 2026, un long-métrage 100 % généré par intelligence artificielle (réalisé avec les outils de Higgsfield) est sorti en salle et en ligne. Pas de plateau, pas de budget de production, pas d'équipe : un créateur seul, des mois de travail, un résultat au niveau du cinéma. La conséquence est brutale : la barrière d'entrée du contenu vidéo vient de s'effondrer. Ceux qui maîtrisent la méthode produisent désormais ce que les studios facturaient 100 000 €.</p>
+      <div class="preuve">
+        <div class="stat"><b>1 personne</b><span>suffit pour produire un film, une pub ou une série de vidéos pro</span></div>
+        <div class="stat"><b>0 €</b><span>de budget studio, de casting ou de matériel de tournage</span></div>
+        <div class="stat"><b>2 semaines</b><span>pour publier votre première vidéo 100 % IA monétisée</span></div>
+        <div class="stat"><b>× 10</b><span>la vitesse de production par rapport à un workflow classique</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORMATION : 12 LEÇONS ============ -->
+  <section id="formation">
+    <div class="wrap">
+      <div class="kicker">La formation</div>
+      <h2 class="sec">12 leçons scénarisées, du concept à la monétisation</h2>
+      <p class="lead">Chaque leçon est dense et 100 % actionnable : la méthode, un exemple réel détaillé, un exercice pratique. Vous avancez dans l'ordre — ou vous piochez selon vos besoins. À la fin : votre première vidéo 100 % IA publiée et monétisée.</p>
+      <div class="lecons">
+        <div class="lecon"><div class="num">LEÇON 01</div><h3>Idéation</h3><p>Trouver des concepts qui marchent — avant de produire. Analyse des tendances, recherche de gap, validation en 24 h.</p></div>
+        <div class="lecon"><div class="num">LEÇON 02</div><h3>Storytelling & scénario</h3><p>La structure en 3 actes, le hook des 5 premières secondes et l'arc émotionnel qui retient jusqu'à la fin.</p></div>
+        <div class="lecon"><div class="num">LEÇON 03</div><h3>Prompt vidéo</h3><p>Écrire des prompts qui donnent des plans exploitables : sujet, caméra, lumière, style. Comparatif des générateurs.</p></div>
+        <div class="lecon"><div class="num">LEÇON 04</div><h3>Direction artistique</h3><p>Un style visuel fort et cohérent : moodboard, palette, style guide, références. Les styles qui « marchent ».</p></div>
+        <div class="lecon"><div class="num">LEÇON 05</div><h3>Personnages cohérents</h3><p>Le même héros dans tout votre film : références visuelles, entraînement, face swap, grille de cohérence.</p></div>
+        <div class="lecon"><div class="num">LEÇON 06</div><h3>Animation & caméra</h3><p>De l'image au mouvement : image-to-video, mouvements de caméra, plans, rythme et continuité.</p></div>
+        <div class="lecon"><div class="num">LEÇON 07</div><h3>Voix & voix off</h3><p>Des voix pro en français en 5 minutes : TTS, clonage (avec droits), émotion, synchronisation labiale.</p></div>
+        <div class="lecon"><div class="num">LEÇON 08</div><h3>Montage IA</h3><p>Assembler un film sans toucher à la timeline : montage par texte, rythme, transitions, multicam.</p></div>
+        <div class="lecon"><div class="num">LEÇON 09</div><h3>Musique & sound design</h3><p>La bande-son qui fait la différence : génération de musique IA, ambiances, mixage voix / musique.</p></div>
+        <div class="lecon"><div class="num">LEÇON 10</div><h3>Finitions pro</h3><p>Sous-titres stylisés, étalonnage, upscaling, exports broadcast et vignettes qui cliquent.</p></div>
+        <div class="lecon"><div class="num">LEÇON 11</div><h3>Distribution</h3><p>Publier et grandir : stratégie YouTube / TikTok / Instagram / X, SEO vidéo, calendrier, premiers 1 000 abonnés.</p></div>
+        <div class="lecon"><div class="num">LEÇON 12</div><h3>Monétisation</h3><p>Les 5 sources de revenus du créateur solo : plateformes, sponsors, affiliation, produits, licensing. Plan chiffré.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OFFRES ============ -->
+  <section id="offres">
+    <div class="wrap">
+      <div class="kicker">Choisissez votre formule</div>
+      <h2 class="sec">3 offres, un seul objectif : votre vidéo publiée et monétisée</h2>
+      <div class="offers">
+        <div class="offer">
+          <h3>📘 La Formation</h3>
+          <div class="desc">Les 12 leçons complètes en niveau expert : méthode dense, exemples réels, exercices pratiques, checklist de fin.</div>
+          <ul>
+            <li>12 leçons rédigées (PDF, ~6 h de contenu)</li>
+            <li>Exemple réel détaillé par leçon</li>
+            <li>Exercices pratiques progressifs</li>
+            <li>Checklist finale « première vidéo publiée »</li>
+            <li>Mises à jour incluses à vie</li>
+          </ul>
+          <div class="prix"><em>97 €</em> <small>paiement unique</small></div>
+          <a class="btn btn-primary" href="#commander" onclick="choisirOffre('📘 La Formation — 97 €')">Commander →</a>
+        </div>
+
+        <div class="offer pop">
+          <div class="tag">⭐ Le plus choisi</div>
+          <h3>🎬 Pack Pro + Studio</h3>
+          <div class="desc">Tout le pack Formation, plus le studio créatif : les outils prêts à l'emploi qui font gagner des semaines.</div>
+          <ul>
+            <li>Formation complète (12 leçons)</li>
+            <li>30 prompts vidéo prêts à l'emploi</li>
+            <li>Templates de scénario & de prompt</li>
+            <li>Grille de cohérence des personnages</li>
+            <li>Presets de montage & kit de publication</li>
+            <li>Bibliothèque d'exemples de films IA</li>
+          </ul>
+          <div class="prix"><em>197 €</em> <small>paiement unique</small></div>
+          <a class="btn btn-primary" href="#commander" onclick="choisirOffre('🎬 Pack Pro + Studio — 197 €')">Commander →</a>
+        </div>
+
+        <div class="offer">
+          <h3>🚀 Accompagnement</h3>
+          <div class="desc">Le Pack Pro, plus 4 semaines avec moi : votre projet passé en revue, jusqu'à la publication.</div>
+          <ul>
+            <li>Pack Pro + Studio complet</li>
+            <li>Revue personnalisée de votre scénario</li>
+            <li>Revue de votre première vidéo (1 passe)</li>
+            <li>Réponses à vos questions (4 semaines)</li>
+            <li>Objectif garanti : vidéo publiée & monétisée</li>
+          </ul>
+          <div class="prix"><em>297 €</em> <small>paiement unique</small></div>
+          <a class="btn btn-primary" href="#commander" onclick="choisirOffre('🚀 Accompagnement — 297 €')">Commander →</a>
+        </div>
+      </div>
+      <p class="mini">Prix affichés en euros, paiement unique, TVA non applicable (article 293 B du CGI).</p>
+    </div>
+  </section>
+
+  <!-- ============ COMMANDE ============ -->
+  <section id="commander">
+    <div class="order">
+      <h2>📦 Commander ma formation</h2>
+      <p>Choisissez votre offre, laissez vos coordonnées : vous recevez une confirmation par email avec les instructions de paiement (virement ou message privé). Le pack complet vous est livré par email dès réception du règlement.</p>
+      <form id="form-commande" onsubmit="return commander(event)">
+        <label for="f-offre">Votre offre</label>
+        <select id="f-offre">
+          <option value="📘 La Formation — 97 €">📘 La Formation — 97 €</option>
+          <option value="🎬 Pack Pro + Studio — 197 €">🎬 Pack Pro + Studio — 197 €</option>
+          <option value="🚀 Accompagnement — 297 €">🚀 Accompagnement — 297 €</option>
+        </select>
+        <label for="f-nom">Votre nom</label>
+        <input id="f-nom" type="text" placeholder="Prénom et nom" required>
+        <label for="f-email">Votre email</label>
+        <input id="f-email" type="email" placeholder="vous@exemple.fr" required>
+        <button type="submit">Commander maintenant →</button>
+        <div class="ok" id="ok">✅ Commande envoyée ! Vous recevez la confirmation par email dans quelques minutes.</div>
+      </form>
+    </div>
+
+    <!-- ============ GARANTIE ============ -->
+    <div class="garantie">
+      <div class="box">
+        <div class="ic">🛡️</div>
+        <div>
+          <b>Garantie satisfait ou remboursé — 14 jours</b>
+          <span>Si la formation ne vous convient pas, demandez le remboursement intégral sous 14 jours, sans justification. Vous ne prenez aucun risque : tout le bénéfice est de votre côté.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    © 2026 Créateur IA — Créer et monétiser du contenu avec l'IA. Tous droits réservés.<br>
+    Une question ? Écrivez-nous : <a href="mailto:contact@createuria.fr">contact@createuria.fr</a>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script>
+/* ============ SCÈNE 3D WEBGL — particules + profondeur ============ */
+const canvas = document.getElementById('bg');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, .1, 100);
+camera.position.z = 8;
+
+/* Particules : cyan → violet */
+const COUNT = 1800;
+const pos = new Float32Array(COUNT*3);
+const col = new Float32Array(COUNT*3);
+for (let i=0;i<COUNT;i++){
+  pos[i*3]   = (Math.random()-.5)*22;
+  pos[i*3+1] = (Math.random()-.5)*14;
+  pos[i*3+2] = (Math.random()-.5)*10 - 2;
+  const c = new THREE.Color().setHSL(.52 + Math.random()*.18, .85, .55 + Math.random()*.35);
+  col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b;
+}
+const geo = new THREE.BufferGeometry();
+geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+geo.setAttribute('color', new THREE.BufferAttribute(col,3));
+const pts = new THREE.Points(geo, new THREE.PointsMaterial({ size:.035, vertexColors:true, transparent:true, opacity:.85 }));
+scene.add(pts);
+
+/* Cœur : icosaèdre wireframe lumineux (cyan) */
+const core = new THREE.Mesh(
+  new THREE.IcosahedronGeometry(1.6, 1),
+  new THREE.MeshBasicMaterial({ color:0x22d3ee, wireframe:true, transparent:true, opacity:.30 })
+);
+scene.add(core);
+
+const core2 = new THREE.Mesh(
+  new THREE.IcosahedronGeometry(2.2, 1),
+  new THREE.MeshBasicMaterial({ color:0x8b5cf6, wireframe:true, transparent:true, opacity:.12 })
+);
+scene.add(core2);
+
+/* Anneaux orbitaux */
+const ring = new THREE.Mesh(
+  new THREE.TorusGeometry(3.1, .008, 8, 90),
+  new THREE.MeshBasicMaterial({ color:0xa78bfa, transparent:true, opacity:.35 })
+);
+scene.add(ring);
+
+const mouse = { x:0, y:0 };
+addEventListener('mousemove', e => {
+  mouse.x = (e.clientX/innerWidth -.5)*2;
+  mouse.y = (e.clientY/innerHeight -.5)*2;
+});
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* ============ PARALLAXE CSS 3D ============ */
+const layers = document.querySelectorAll('.layer');
+addEventListener('mousemove', e => {
+  const x = (e.clientX/innerWidth -.5)*2, y = (e.clientY/innerHeight -.5)*2;
+  layers.forEach(l => {
+    const d = parseFloat(l.dataset.depth);
+    l.style.transform = `translate3d(${x*22*d}px, ${y*16*d}px, 0)`;
+  });
+  core.rotation.y += .0008; core.rotation.x += .0003;
+  ring.rotation.z += .0005;
+});
+
+/* Scroll : profondeur + rotation */
+addEventListener('scroll', () => {
+  const t = scrollY/innerHeight;
+  camera.position.z = 8 - t*4;
+  core.rotation.y = t*Math.PI*2;
+});
+
+/* Cartes 3D au survol */
+document.querySelectorAll('.lecon').forEach(carte => {
+  carte.addEventListener('mousemove', e => {
+    const r = carte.getBoundingClientRect();
+    const rx = (e.clientY - r.top)/r.height -.5, ry = (e.clientX - r.left)/r.width -.5;
+    carte.style.transform = `rotateX(${rx*-7}deg) rotateY(${ry*9}deg) translateZ(0)`;
+  });
+  carte.addEventListener('mouseleave', () => { carte.style.transform = 'rotateX(0) rotateY(0)'; });
+});
+
+/* Boucle d'animation */
+(function animate(){
+  requestAnimationFrame(animate);
+  pts.rotation.y += .0006;
+  pts.rotation.x += .0002;
+  core.rotation.y += .0015;
+  core2.rotation.y -= .0008;
+  ring.rotation.x += .0012;
+  camera.position.x += (mouse.x*1.2 - camera.position.x)*.04;
+  camera.position.y += (-mouse.y*.9 - camera.position.y)*.04;
+  camera.lookAt(0,0,0);
+  renderer.render(scene, camera);
+})();
+</script>
+
+<!-- ============ EMAILJS : formulaire de commande (réel) ============ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("8Pui4ZEqxW2jRVF7h");
+
+/* Les boutons « Commander » des offres pré-remplissent le formulaire */
+function choisirOffre(offre) {
+  var sel = document.getElementById('f-offre');
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === offre) { sel.selectedIndex = i; break; }
+  }
+}
+
+function commander(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  var d = {
+    site: 'Créateur IA — Formation Contenu IA',
+    name: document.getElementById('f-nom').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    question: 'Commande : ' + document.getElementById('f-offre').value
+  };
+  if (!d.name || !d.email) { alert('Merci de remplir votre nom et votre email.'); return false; }
+  emailjs.send("service_cy1ytdb", "template_xpo58cv", d)
+    .then(function () {
+      document.getElementById('ok').style.display = 'block';
+      document.getElementById('form-commande').reset();
+      document.getElementById('ok').scrollIntoView({ behavior:'smooth', block:'center' });
+    })
+    .catch(function (e) { alert('Erreur d\'envoi : ' + (e && e.text ? e.text : 'réessayez dans un instant.')); });
+  return false;
+}
+</script>
+
+<!-- ============ CHATBOT « Créateur IA » ============ -->
+<script src="chatbot-config.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>
