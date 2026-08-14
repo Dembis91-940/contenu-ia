@@ -150,7 +150,7 @@
   <section id="preuve">
     <div class="wrap">
       <div class="kicker">Pourquoi maintenant</div>
-      <h2 class="sec">Ce qui demandait 20 personnes en demande maintenant… une seule.</h2>
+      <h2 class="sec">Ce qui demandait 20 personnes demande maintenant… une seule.</h2>
       <p class="lead">En 2026, un long-métrage 100 % généré par intelligence artificielle (réalisé avec les outils de Higgsfield) est sorti en salle et en ligne. Pas de plateau, pas de budget de production, pas d'équipe : un créateur seul, des mois de travail, un résultat au niveau du cinéma. La conséquence est brutale : la barrière d'entrée du contenu vidéo vient de s'effondrer. Ceux qui maîtrisent la méthode produisent désormais ce que les studios facturaient 100 000 €.</p>
       <div class="preuve">
         <div class="stat"><b>1 personne</b><span>suffit pour produire un film, une pub ou une série de vidéos pro</span></div>
@@ -281,6 +281,7 @@
 <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
 <script>
 /* ============ SCÈNE 3D WEBGL — particules + profondeur ============ */
+try {
 const canvas = document.getElementById('bg');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
 renderer.setSize(innerWidth, innerHeight);
@@ -381,6 +382,7 @@ document.querySelectorAll('.lecon').forEach(carte => {
   camera.lookAt(0,0,0);
   renderer.render(scene, camera);
 })();
+} catch (err) { var bgEl = document.getElementById('bg'); if (bgEl) bgEl.style.display = 'none'; }
 </script>
 
 <!-- ============ EMAILJS : formulaire de commande (réel) ============ -->
