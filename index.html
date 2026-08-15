@@ -11,6 +11,22 @@
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary">
 <meta name="description" content="Un film 100 % IA est sorti. Un solo peut désormais produire ce qui demandait une équipe. Apprenez à créer, publier et monétiser vos vidéos 100 % IA en 2 semaines.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Formation Créer et monétiser du contenu avec l'IA",
+  "description": "12 leçons pour créer, publier et monétiser des vidéos 100 % IA : scénario, prompts vidéo, voix, montage, musique et monétisation. Première vidéo publiée en 2 semaines.",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "97",
+    "highPrice": "297",
+    "offerCount": "3",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -111,6 +127,12 @@
     section { padding:4rem 1.4rem; }
     .offer .prix { font-size:1.9rem; }
   }
+  /* ---------- Révélation au scroll ---------- */
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1; transform:none; transition:none; }
+  }
 </style>
 </head>
 <body>
@@ -152,7 +174,7 @@
       <div class="kicker">Pourquoi maintenant</div>
       <h2 class="sec">Ce qui demandait 20 personnes demande maintenant… une seule.</h2>
       <p class="lead">En 2026, un long-métrage 100 % généré par intelligence artificielle (réalisé avec les outils de Higgsfield) est sorti en salle et en ligne. Pas de plateau, pas de budget de production, pas d'équipe : un créateur seul, des mois de travail, un résultat au niveau du cinéma. La conséquence est brutale : la barrière d'entrée du contenu vidéo vient de s'effondrer. Ceux qui maîtrisent la méthode produisent désormais ce que les studios facturaient 100 000 €.</p>
-      <div class="preuve">
+      <div class="preuve reveal">
         <div class="stat"><b>1 personne</b><span>suffit pour produire un film, une pub ou une série de vidéos pro</span></div>
         <div class="stat"><b>0 €</b><span>de budget studio, de casting ou de matériel de tournage</span></div>
         <div class="stat"><b>2 semaines</b><span>pour publier votre première vidéo 100 % IA monétisée</span></div>
@@ -167,7 +189,7 @@
       <div class="kicker">La formation</div>
       <h2 class="sec">12 leçons scénarisées, du concept à la monétisation</h2>
       <p class="lead">Chaque leçon est dense et 100 % actionnable : la méthode, un exemple réel détaillé, un exercice pratique. Vous avancez dans l'ordre — ou vous piochez selon vos besoins. À la fin : votre première vidéo 100 % IA publiée et monétisée.</p>
-      <div class="lecons">
+      <div class="lecons reveal">
         <div class="lecon"><div class="num">LEÇON 01</div><h3>Idéation</h3><p>Trouver des concepts qui marchent — avant de produire. Analyse des tendances, recherche de gap, validation en 24 h.</p></div>
         <div class="lecon"><div class="num">LEÇON 02</div><h3>Storytelling & scénario</h3><p>La structure en 3 actes, le hook des 5 premières secondes et l'arc émotionnel qui retient jusqu'à la fin.</p></div>
         <div class="lecon"><div class="num">LEÇON 03</div><h3>Prompt vidéo</h3><p>Écrire des prompts qui donnent des plans exploitables : sujet, caméra, lumière, style. Comparatif des générateurs.</p></div>
@@ -189,7 +211,7 @@
     <div class="wrap">
       <div class="kicker">Choisissez votre formule</div>
       <h2 class="sec">3 offres, un seul objectif : votre vidéo publiée et monétisée</h2>
-      <div class="offers">
+      <div class="offers reveal">
         <div class="offer">
           <h3>📘 La Formation</h3>
           <div class="desc">Les 12 leçons complètes en niveau expert : méthode dense, exemples réels, exercices pratiques, checklist de fin.</div>
@@ -240,7 +262,7 @@
 
   <!-- ============ COMMANDE ============ -->
   <section id="commander">
-    <div class="order">
+    <div class="order reveal">
       <h2>📦 Commander ma formation</h2>
       <p>Choisissez votre offre, laissez vos coordonnées : vous recevez une confirmation par email avec les instructions de paiement (virement ou message privé). Le pack complet vous est livré par email dès réception du règlement.</p>
       <form id="form-commande" onsubmit="return commander(event)">
@@ -418,6 +440,19 @@ function commander(event) {
 }
 </script>
 
+<script>
+/* Révélation au scroll — progressif, non intrusif */
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { for (var i=0;i<els.length;i++) els[i].classList.add('visible'); return; }
+  var io = new IntersectionObserver(function(entries){
+    for (var j=0;j<entries.length;j++){
+      if (entries[j].isIntersecting || entries[j].boundingClientRect.top < window.innerHeight) { entries[j].target.classList.add('visible'); io.unobserve(entries[j].target); }
+    }
+  }, { threshold:.12, rootMargin:'0px 0px -8% 0px' });
+  for (var k=0;k<els.length;k++) io.observe(els[k]);
+})();
+</script>
 <!-- ============ CHATBOT « Créateur IA » ============ -->
 <script src="chatbot-config.js"></script>
 <script src="chatbot.js"></script>
