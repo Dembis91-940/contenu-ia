@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de calendrier de contenu IA — 30 jours, prêt à publier</title>
+<meta name="description" content="Entrez votre domaine, votre audience et 3 angles : générez en 10 secondes un calendrier éditorial de 30 jours — idée, format, accroche et appel à l'action pour chaque jour.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%93%85%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+    background:
+      radial-gradient(1000px 560px at 85% -10%,rgba(45,212,191,.14),transparent 60%),
+      radial-gradient(820px 500px at -10% 25%,rgba(255,122,182,.10),transparent 60%),
+      radial-gradient(700px 460px at 50% 115%,rgba(255,255,255,.03),transparent 60%),
+      #081018;
+    background-attachment:fixed;
+    color:#f2eaf2; min-height:100vh; overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(ellipse 120% 90% at 50% 0%,#000 30%,transparent 78%);
+    mask-image:radial-gradient(ellipse 120% 90% at 50% 0%,#000 30%,transparent 78%);
+  }
+  h1,h2,h3,.kicker,.logo{font-family:'Sora','Space Grotesk',system-ui,sans-serif;letter-spacing:-.02em}
+  ::selection{background:#2dd4bf;color:#04070d}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:#081018}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ff7ab6,#2dd4bf);border-radius:99px;border:3px solid #081018}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+  /* En-tête */
+  header{display:flex;align-items:center;gap:14px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.12);background:rgba(8,12,20,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  header .wrap{display:flex;align-items:center;gap:14px;width:100%}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:#f2eaf2;text-decoration:none}
+  .logo .mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(120deg,#0fb5a0,#ff7ab6);display:flex;align-items:center;justify-content:center;font-size:17px;color:#04141c;box-shadow:0 0 22px rgba(255,122,182,.45)}
+  .logo span.grad{background:linear-gradient(120deg,#14c9b2,#ff7ab6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .logo small{display:block;font-size:10px;font-weight:600;letter-spacing:1.6px;color:#8a6d86;text-transform:uppercase}
+  header a.retour{margin-left:auto;color:#5eead4;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+  header a.retour:hover{text-shadow:0 0 14px rgba(45,212,191,.8)}
+
+  /* Hero */
+  .kicker{margin-top:48px;display:inline-block;font-size:12px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:#5eead4;background:rgba(255,122,182,.14);border:1px solid rgba(255,122,182,.35);padding:6px 14px;border-radius:999px;color:#ffc2dc}
+  h1{font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin:16px 0 12px;max-width:820px}
+  h1 .hl{background:linear-gradient(120deg,#2dd4bf,#14c9b2,#ff8fb8,#ff9dc9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .intro{color:#a89ab5;font-size:16.5px;max-width:680px;line-height:1.7}
+  .intro strong{color:#f2eaf2}
+
+  /* Étapes */
+  .etapes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+  .etape{background:rgba(255,255,255,.04);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px 16px 14px}
+  .etape .n{font-size:11px;font-weight:800;letter-spacing:2px;color:#2dd4bf}
+  .etape p{font-size:13px;color:#a89ab5;margin-top:5px;line-height:1.5}
+
+  /* Carte formulaire */
+  .card{background:rgba(255,255,255,.04);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:34px 36px;margin-top:30px;box-shadow:0 20px 50px -16px rgba(45,212,191,.15)}
+  .champ{margin-bottom:22px}
+  .champ label{display:block;font-size:14px;font-weight:700;margin-bottom:8px;color:#e8dce8}
+  .champ label small{color:#8a6d86;font-weight:500}
+  .champ input[type=text]{width:100%;background:#0c141c;border:1px solid rgba(255,255,255,.15);color:#f2eaf2;border-radius:12px;padding:13px 15px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s, box-shadow .2s}
+  .champ input:focus{border-color:#14c9b2;box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+  .champ .hint{font-size:12px;color:#8a6d86;margin-top:6px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(120deg,#2dd4bf,#ff7ab6);background-size:180% 180%;animation:btnFlow 5s ease infinite;color:#04141c;font-weight:800;border:none;cursor:pointer;border-radius:999px;padding:15px 32px;font-size:16px;font-family:inherit;box-shadow:0 10px 30px -8px rgba(45,212,191,.35);text-decoration:none;transition:transform .2s, box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 44px -8px rgba(255,122,182,.5)}
+  @keyframes btnFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .btn-ghost{background:rgba(255,255,255,.03);color:#f2eaf2;border:1px solid rgba(255,255,255,.15);box-shadow:none;animation:none}
+  .btn-ghost:hover{border-color:#2dd4bf;color:#5eead4;box-shadow:none}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .mini{font-size:12.5px;color:#8a6d86;text-align:center;margin-top:14px}
+
+  /* Résultat */
+  .resultat{display:none;margin-top:40px}
+  .resultat.visible{display:block;animation:apparaitre .4s ease}
+  @keyframes apparaitre{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .res-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .res-head h2{font-size:22px;color:#ccfbf1}
+  .res-head .badge{background:rgba(255,122,182,.14);border:1px solid rgba(255,122,182,.4);color:#ffc2dc;border-radius:999px;padding:5px 13px;font-size:12px;font-weight:600}
+  .sommaire{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 18px;margin:14px 0 26px;font-size:13.5px;color:#a89ab5;line-height:1.7}
+  .sommaire b{color:#5eead4}
+
+  .semaine{margin-bottom:26px}
+  .semaine h3{font-size:16px;letter-spacing:1.6px;text-transform:uppercase;color:#2dd4bf;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .semaine h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(45,212,191,.4),transparent)}
+  .jours{display:grid;grid-template-columns:1fr;gap:10px}
+  .jour{background:rgba(255,255,255,.04);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 18px;transition:border-color .2s, transform .2s}
+  .jour:hover{border-color:rgba(45,212,191,.45);transform:translateY(-2px)}
+  .jour-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .j-num{font-weight:800;font-size:13px;color:#ff9dc9;letter-spacing:.5px}
+  .j-format{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.4);color:#5eead4;border-radius:999px;padding:3px 10px}
+  .j-objectif{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;background:rgba(255,122,182,.12);border:1px solid rgba(255,122,182,.35);color:#ffc2dc;border-radius:999px;padding:3px 10px}
+  .jour .idee{font-size:14.5px;color:#e8dce8;line-height:1.55}
+  .jour .accroche{margin-top:7px;font-size:13.5px;color:#ffc2dc;line-height:1.5}
+  .jour .accroche::before{content:"📣 "}
+  .jour .cta{margin-top:7px;font-size:13px;color:#a89ab5;line-height:1.5}
+  .jour .cta::before{content:"🎯 "}
+
+  /* Bloc CTA formation */
+  .cta-bloc{background:linear-gradient(160deg,rgba(13,18,32,.9),rgba(20,16,30,.9));border:1px solid rgba(255,122,182,.3);border-radius:22px;padding:38px;text-align:center;margin:44px 0 10px;backdrop-filter:blur(14px)}
+  .cta-bloc h2{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.02em;background:linear-gradient(120deg,#99f6e4,#ff9dc9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta-bloc p{color:#a89ab5;margin:12px auto 24px;max-width:540px;line-height:1.7}
+  .cta-bloc .prix{margin-top:14px;font-size:13px;color:#8a6d86}
+  footer{margin-top:46px;padding:26px 0 40px;border-top:1px solid rgba(255,255,255,.1);color:#8a6d86;font-size:13px;text-align:center;line-height:1.7}
+  footer a{color:#5eead4;text-decoration:none}
+
+  @media(max-width:680px){.etapes{grid-template-columns:1fr}.card{padding:26px 20px}.cta-bloc{padding:30px 22px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><span class="mark">📅</span><span>C<small>réateur</small><span class="grad"> IA</span></span></a>
+    <a class="retour" href="index.html">← Retour à l'accueil</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="kicker">Outil gratuit · Sans inscription · 30 secondes</div>
+  <h1>Votre calendrier de contenu <span class="hl">30 jours, prêt à publier</span></h1>
+  <p class="intro">Décrivez votre <strong>domaine</strong>, votre <strong>audience</strong> et 3 <strong>angles éditoriaux</strong> : l'outil génère un mois complet de publications — idée, format, accroche et appel à l'action pour chaque jour, organisé en 4 semaines.</p>
+
+  <div class="etapes">
+    <div class="etape"><div class="n">ÉTAPE 1</div><p>Renseignez votre domaine, votre audience et vos 3 angles.</p></div>
+    <div class="etape"><div class="n">ÉTAPE 2</div><p>Cliquez sur « Générer mon planning » : 30 jours apparaissent.</p></div>
+    <div class="etape"><div class="n">ÉTAPE 3</div><p>Copiez le planning en texte ou publiez directement vos idées.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="champ">
+      <label for="domaine">Votre domaine d'activité <small>(ex. : restauration, e-commerce, coaching)</small></label>
+      <input type="text" id="domaine" placeholder="Ex. : restauration" autocomplete="off">
+    </div>
+    <div class="champ">
+      <label for="audience">Votre audience <small>(à qui vous vous adressez)</small></label>
+      <input type="text" id="audience" placeholder="Ex. : jeunes actifs urbains qui mangent dehors" autocomplete="off">
+    </div>
+    <div class="champ">
+      <label for="angle1">Angle éditorial n°1</label>
+      <input type="text" id="angle1" placeholder="Ex. : les coulisses" autocomplete="off">
+    </div>
+    <div class="champ">
+      <label for="angle2">Angle éditorial n°2</label>
+      <input type="text" id="angle2" placeholder="Ex. : les erreurs à éviter" autocomplete="off">
+    </div>
+    <div class="champ">
+      <label for="angle3">Angle éditorial n°3</label>
+      <input type="text" id="angle3" placeholder="Ex. : les tutos rapides" autocomplete="off">
+    </div>
+    <div class="actions">
+      <button class="btn" id="btn-generer">✨ Générer mon planning →</button>
+      <button class="btn btn-ghost" id="btn-reset">↺ Réinitialiser</button>
+    </div>
+    <p class="mini">Vos saisies sont enregistrées localement dans votre navigateur. Rien n'est envoyé sur Internet.</p>
+  </div>
+
+  <div class="resultat" id="resultat">
+    <div class="res-head">
+      <h2>📅 Votre planning éditorial — 30 jours</h2>
+      <span class="badge">4 semaines + 2 jours bonus</span>
+    </div>
+    <div class="sommaire" id="sommaire"></div>
+    <div id="planning"></div>
+    <div class="actions" style="margin-top:4px">
+      <button class="btn" id="btn-copier">📋 Copier le planning en texte</button>
+      <a class="btn btn-ghost" href="index.html#offres">⚡ Je veux aller plus loin — voir les offres</a>
+    </div>
+    <p class="mini" id="copie-ok" style="display:none">✅ Planning copié dans votre presse-papiers !</p>
+  </div>
+
+  <div class="cta-bloc">
+    <h2>Publier, c'est bien. Monétiser, c'est mieux.</h2>
+    <p>La formation « Créer et monétiser du contenu avec l'IA » vous apprend à produire vos vidéos 100 % IA en 2 semaines : scénario, prompts vidéo, voix, montage, distribution et monétisation.</p>
+    <a class="btn" href="index.html#offres">Découvrir la formation →</a>
+    <div class="prix">À partir de <strong style="color:#ff9dc9">97 €</strong> — garantie satisfait ou remboursé 14 jours</div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Créateur IA — Générateur de calendrier de contenu. <a href="index.html">Retour au site</a>.<br>
+  Une question ? <a href="mailto:contact@createuria.fr">contact@createuria.fr</a>
+</footer>
+
+<script>
+/* ============ GÉNÉRATEUR DE CALENDRIER — 100 % local ============ */
+(function(){
+  var LS_KEY = 'calendrier-contenu-v1';
+  var $ = function(id){ return document.getElementById(id); };
+
+  var FORMATS = [
+    'Carrousel Instagram (5 slides)','Vidéo courte (Reels / Shorts / TikTok)','Post LinkedIn',
+    'Newsletter / email','Article de blog','Sondage / story interactive','Tutoriel pas à pas',
+    'Témoignage vidéo','Avant / après visuel','Quiz interactif'
+  ];
+  var OBJECTIFS = ['Inspirer','Éduquer','Prouver','Engager','Coulisses','Vendre','Fidéliser'];
+
+  var IDEES = [
+    'Racontez une histoire de {domaine} vécue du point de vue de {audience} — le jour où tout a failli tourner court.',
+    '3 leçons de {domaine} que {audience} aurait aimé connaître avant de se lancer.',
+    '{angle1} : la méthode pas à pas, sans jargon, testée pour {audience}.',
+    'Avant / après : ce que {domaine} change concrètement pour {audience} en 30 jours.',
+    'Les 3 erreurs qui coûtent le plus cher en {domaine} — la 2ᵉ est invisible pour {audience}.',
+    'Coulisses : une journée type en {domaine}, minute par minute.',
+    '{angle2} : l\u2019erreur n°1 que commettent les débutants en {domaine} — et comment l\u2019éviter.',
+    'Le vrai coût caché de {domaine} : ce que personne ne dit à {audience}.',
+    'Témoignage : comment {domaine} a changé la façon de travailler de {audience}.',
+    'Sondage : quelle est LA question que {audience} se pose le plus sur {domaine} ?',
+    '5 outils gratuits pour {domaine} que {audience} ignore (à tort).',
+    '{angle3} expliqué en 60 secondes — le format idéal pour {audience}.',
+    'Le mythe le plus répandu sur {domaine} — et la vérité que {audience} doit connaître.',
+    'Comment {audience} passe de débutant à à l\u2019aise en {domaine} : la feuille de route.',
+    'Réponse à la question que {audience} pose le plus souvent sur {domaine}.',
+    'Ce que des années de {domaine} m\u2019ont appris — et que j\u2019aurais aimé savoir avant de commencer.',
+    '{angle1} : la checklist de A à Z, à garder précieusement.',
+    'Les coulisses d\u2019un projet {domaine} : du premier doute au résultat final.',
+    'Erreur fatale en {domaine} : ce qui a failli tout gâcher — et comment le corriger.',
+    '3 signes que {domaine} est fait pour vous (si vous êtes {audience}).',
+    '{angle2} : l\u2019habitude n°1 qui change tout pour {audience}.',
+    'Comparatif : 3 façons d\u2019aborder {domaine} — laquelle choisir quand on est {audience} ?',
+    'La vérité inconfortable sur {domaine} : ce que les pros ne disent jamais.',
+    'Quiz : quel profil {domaine} êtes-vous ? (test de 30 secondes pour {audience})',
+    'Une astuce de pro en {domaine}, applicable dès aujourd\u2019hui par {audience}.',
+    'Derrière l\u2019écran : comment je prépare {domaine} en 2 heures par semaine.',
+    '{angle3} : l\u2019exemple concret qui rend tout clair pour {audience}.',
+    'Le retour sur investissement de {domaine} : 3 chiffres qui parlent à {audience}.',
+    'Journée spéciale : vos questions sur {domaine}, nos réponses en direct.',
+    'Le récap du mois : ce que {domaine} a changé pour {audience} — et la suite.'
+  ];
+
+  var ACCROCHES = [
+    'Personne ne vous dit ça sur {domaine}…',
+    'J\u2019ai testé {angle} pendant 30 jours, voici ce qui s\u2019est vraiment passé.',
+    'Si vous êtes {audience}, cette astuce vaut de l\u2019or. 💡',
+    'Stop : il y a une façon plus simple de faire {domaine}.',
+    'La vérité sur {domaine} que les pros gardent pour eux. 🤫',
+    'Ce post va vous faire gagner des heures en {domaine}.',
+    'Vous faites peut-être cette erreur en {domaine} sans le savoir. ⚠️',
+    'Un an après, voici ce que {domaine} m\u2019a réellement apporté.',
+    'Le conseil que j\u2019aurais aimé recevoir avant de me lancer en {domaine}.',
+    '3 minutes pour comprendre ce qui prend des mois à {audience}.',
+    'Cette question revient tout le temps : on y répond enfin. 👇',
+    'Ce que j\u2019aurais fait différemment en {domaine} — sans filtre.'
+  ];
+
+  var CTAS = [
+    '👉 Sauvegardez ce post pour le retrouver plus tard.',
+    '📩 Envoyez-nous « GUIDE » en message privé pour recevoir notre PDF offert.',
+    '💬 Dites-nous en commentaire : quelle est votre plus grande difficulté en {domaine} ?',
+    '📲 Partagez ce post à quelqu\u2019un qui se lance en {domaine}.',
+    '🗓️ Réservez votre appel découverte gratuit (15 min).',
+    '❤️ Suivez-nous pour la suite de la série.',
+    '📌 Épinglez ce post : il vous servira toute l\u2019année.',
+    '✉️ Abonnez-vous à la newsletter : 1 conseil {domaine} par semaine.',
+    '🎁 Téléchargez la check-list gratuite en commentaire « CHECKLIST ».',
+    '⚡ Testez cette méthode dès aujourd\u2019hui, puis racontez-nous.',
+    '🔔 Activez la cloche pour ne rien manquer.',
+    '👥 Partagez à un ami qui se lance en {domaine}.'
+  ];
+
+  /* Pseudo-aléatoire déterministe : même saisie = même planning reproductible */
+  function hash(s){ var h=2166136261; for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+  function cap(s){ s=(s||'').trim(); return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
+
+  function remplacer(txt, d, a, angles){
+    return txt
+      .replace(/\{domaine\}/g, d)
+      .replace(/\{audience\}/g, a)
+      .replace(/\{angle\}/g, (angles[0]||'votre sujet').toLowerCase())
+      .replace(/\{angle1\}/g, (angles[0]||'votre angle').toLowerCase())
+      .replace(/\{angle2\}/g, (angles[1]||'votre angle').toLowerCase())
+      .replace(/\{angle3\}/g, (angles[2]||'votre angle').toLowerCase());
+  }
+
+  function generer(){
+    var domaine = $('domaine').value.trim();
+    var audience = $('audience').value.trim();
+    var angles = [$('angle1').value.trim(), $('angle2').value.trim(), $('angle3').value.trim()];
+    if (!domaine || !audience || !angles[0] || !angles[1] || !angles[2]){
+      alert('Merci de remplir votre domaine, votre audience et vos 3 angles pour générer le planning.');
+      return;
+    }
+    sauvegarder();
+
+    var seed = hash((domaine+'|'+audience+'|'+angles.join('|')).toLowerCase());
+    var rnd = mulberry32(seed);
+
+    var jours = [];
+    var comptFormats = {}; var comptAngles = {};
+    for (var i=0;i<30;i++){
+      var num = i+1;
+      var angle = angles[i%3];
+      var idee = remplacer(IDEES[i], domaine, audience, angles);
+      var format = FORMATS[Math.floor(rnd()*FORMATS.length)];
+      var accroche = remplacer(ACCROCHES[Math.floor(rnd()*ACCROCHES.length)], domaine, audience, angles);
+      var cta = remplacer(CTAS[Math.floor(rnd()*CTAS.length)], domaine, audience, angles);
+      var objectif = OBJECTIFS[i%7];
+      comptFormats[format] = (comptFormats[format]||0)+1;
+      comptAngles[cap(angle)] = (comptAngles[cap(angle)]||0)+1;
+      jours.push({ num:num, idee:idee, format:format, accroche:accroche, cta:cta, objectif:objectif, angle:cap(angle) });
+    }
+
+    /* Semaine 1 : jours 1-7 · Semaine 2 : 8-14 · Semaine 3 : 15-21 · Semaine 4 : 22-28 · Bonus : 29-30 */
+    var semaines = [
+      { titre:'Semaine 1', debut:1, fin:7 },
+      { titre:'Semaine 2', debut:8, fin:14 },
+      { titre:'Semaine 3', debut:15, fin:21 },
+      { titre:'Semaine 4', debut:22, fin:28 },
+      { titre:'Jours bonus 🎁', debut:29, fin:30 }
+    ];
+
+    var html = '';
+    semaines.forEach(function(s){
+      html += '<div class="semaine"><h3>'+s.titre+' · Jours '+s.debut+'–'+s.fin+'</h3><div class="jours">';
+      for (var j=s.debut-1;j<=s.fin-1;j++){
+        var d = jours[j];
+        html += '<div class="jour">'
+          + '<div class="jour-top"><span class="j-num">Jour '+d.num+'</span><span class="j-format">'+d.format+'</span><span class="j-objectif">'+d.objectif+'</span></div>'
+          + '<div class="idee">💡 '+d.idee+'</div>'
+          + '<div class="accroche">'+d.accroche+'</div>'
+          + '<div class="cta">'+d.cta+'</div>'
+          + '</div>';
+      }
+      html += '</div></div>';
+    });
+    $('planning').innerHTML = html;
+
+    /* Sommaire / statistiques */
+    var formatDominant = ''; var maxF = 0;
+    for (var f in comptFormats){ if (comptFormats[f]>maxF){ maxF=comptFormats[f]; formatDominant=f; } }
+    var angleDominant = ''; var maxA = 0;
+    for (var g in comptAngles){ if (comptAngles[g]>maxA){ maxA=comptAngles[g]; angleDominant=g; } }
+    $('sommaire').innerHTML =
+      '📊 <b>30 publications</b> générées pour <b>'+domaine+'</b> · format le plus fréquent : <b>'+formatDominant+'</b> ('+maxF+' jours)'
+      + ' · angle dominant : <b>'+angleDominant+'</b> ('+maxA+' jours).'
+      + '<br>💡 Conseil : publiez 4 à 5 fois par semaine, variez les formats, et gardez l\u2019angle qui engage le plus — c\u2019est lui qui construit votre autorité.';
+
+    $('resultat').classList.add('visible');
+    $('resultat').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function texteExport(){
+    var domaine = $('domaine').value.trim(), audience = $('audience').value.trim();
+    var angles = [$('angle1').value.trim(), $('angle2').value.trim(), $('angle3').value.trim()];
+    var semaines = [ {t:'Semaine 1 — Jours 1 à 7',d:1,f:7}, {t:'Semaine 2 — Jours 8 à 14',d:8,f:14}, {t:'Semaine 3 — Jours 15 à 21',d:15,f:21}, {t:'Semaine 4 — Jours 22 à 28',d:22,f:28}, {t:'Jours bonus — 29 et 30',d:29,f:30} ];
+    var lignes = [];
+    lignes.push('📅 CALENDRIER DE CONTENU — 30 JOURS');
+    lignes.push('Domaine : '+domaine+' · Audience : '+audience);
+    lignes.push('Angles : '+angles.join(' / '));
+    lignes.push('');
+    semaines.forEach(function(s){
+      lignes.push('────── '+s.t.toUpperCase()+' ──────');
+      for (var j=s.d-1;j<=s.f-1;j++){
+        var d = joursGen[j];
+        lignes.push('');
+        lignes.push('Jour '+d.num+' — '+d.format+' ('+d.objectif+')');
+        lignes.push('💡 Idée : '+d.idee);
+        lignes.push('📣 Accroche : '+d.accroche);
+        lignes.push('🎯 CTA : '+d.cta);
+      }
+      lignes.push('');
+    });
+    lignes.push('Généré avec le Générateur de calendrier de contenu IA — Créateur IA.');
+    return lignes.join('\n');
+  }
+  var joursGen = [];
+
+  function copier(){
+    var txt = texteExport();
+    function ok(){ var o=$('copie-ok'); o.style.display='block'; setTimeout(function(){o.style.display='none';},3000); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(ok).catch(function(){ fallbackCopie(txt, ok); });
+    } else { fallbackCopie(txt, ok); }
+  }
+  function fallbackCopie(txt, cb){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta); cb();
+  }
+
+  function sauvegarder(){
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify({
+        domaine:$('domaine').value, audience:$('audience').value,
+        angle1:$('angle1').value, angle2:$('angle2').value, angle3:$('angle3').value,
+        saved: new Date().toISOString()
+      }));
+    } catch(e){}
+  }
+  function restaurer(){
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (!raw) return;
+      var d = JSON.parse(raw);
+      if (d.domaine) $('domaine').value = d.domaine;
+      if (d.audience) $('audience').value = d.audience;
+      if (d.angle1) $('angle1').value = d.angle1;
+      if (d.angle2) $('angle2').value = d.angle2;
+      if (d.angle3) $('angle3').value = d.angle3;
+    } catch(e){}
+  }
+  function reset(){
+    try { localStorage.removeItem(LS_KEY); } catch(e){}
+    ['domaine','audience','angle1','angle2','angle3'].forEach(function(id){ $(id).value=''; });
+    $('resultat').classList.remove('visible');
+    $('planning').innerHTML='';
+  }
+
+  $('btn-generer').addEventListener('click', function(){
+    joursGen = [];
+    generer();
+    /* reconstruction pour l'export : on régénère proprement */
+    var domaine = $('domaine').value.trim(), audience = $('audience').value.trim();
+    var angles = [$('angle1').value.trim(), $('angle2').value.trim(), $('angle3').value.trim()];
+    var seed = hash((domaine+'|'+audience+'|'+angles.join('|')).toLowerCase());
+    var rnd = mulberry32(seed);
+    joursGen = [];
+    for (var i=0;i<30;i++){
+      var angle = angles[i%3];
+      joursGen.push({
+        num:i+1,
+        idee:remplacer(IDEES[i], domaine, audience, angles),
+        format:FORMATS[Math.floor(rnd()*FORMATS.length)],
+        accroche:remplacer(ACCROCHES[Math.floor(rnd()*ACCROCHES.length)], domaine, audience, angles),
+        cta:remplacer(CTAS[Math.floor(rnd()*CTAS.length)], domaine, audience, angles),
+        objectif:OBJECTIFS[i%7]
+      });
+    }
+  });
+  $('btn-copier').addEventListener('click', copier);
+  $('btn-reset').addEventListener('click', reset);
+
+  ['domaine','audience','angle1','angle2','angle3'].forEach(function(id){
+    $(id).addEventListener('change', sauvegarder);
+  });
+
+  restaurer();
+})();
+</script>
+</body>
+</html>
