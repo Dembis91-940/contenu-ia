@@ -1,7 +1,7 @@
 window.CHATBOT_CONFIG = {
   "name": "Créateur IA",
   "subtitle": "Assistant — Formation contenu IA",
-  "accent": "#8b5cf6",
+  "accent": "#ff7ab6",
   "welcome": "Bonjour ! 👋 Je suis Créateur IA, l'assistant de la formation « Créer et monétiser du contenu avec l'IA ». Scénario, prompt vidéo, voix, montage, monétisation : je réponds à vos questions en 30 secondes.",
   "quick": [
     "La formation est pour qui ?",
